@@ -28,7 +28,7 @@ public class ListarServiceImpl<T> implements ListarService<T> {
         }
         System.out.println(MENU_LISTA);
         for (int i = 0; i < lista.size(); i++){
-            System.out.println(i + " - " + lista.get(i));
+            System.out.println(i+1 + " - " + lista.get(i));
         }
     }
 
@@ -37,16 +37,24 @@ public class ListarServiceImpl<T> implements ListarService<T> {
         int opcion;
         T seleccion;
         System.out.println(MENU_SELECCIONAR);
-
+        if(lista.isEmpty()){
+            System.out.println(MENU_LISTA_VACIA);
+            return null;
+        }
         do {
             opcion = (int) InputUtils.leerEnteroPositivo();
         }
-        while (opcion < 0 || opcion > lista.size());
+        while (opcion < 1 || opcion > lista.size());
 
-        seleccion = lista.get(opcion);
+        seleccion = lista.get(opcion - 1);
 
         System.out.println(MENU_SELECCION + seleccion);
 
         return seleccion;
+    }
+
+    @Override
+    public List<T> getLista() {
+        return lista;
     }
 }

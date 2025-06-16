@@ -3,10 +3,23 @@ package org.informatorio;
 import org.informatorio.Storing.EquiposStoring;
 import org.informatorio.Storing.JugadoresStoring;
 import org.informatorio.Storing.PartidosStoring;
+import org.informatorio.entities.Equipo;
+import org.informatorio.entities.Jugador.Jugador;
+import org.informatorio.entities.Partido;
+import org.informatorio.services.asignarGolesJugador.asignarGolesAJugadorService;
+import org.informatorio.services.asignarGolesJugador.asignarGolesAJugadorServiceImpl1;
+import org.informatorio.services.incorporarJugadorEquipo.incorporarJugadorEquipoService;
+import org.informatorio.services.incorporarJugadorEquipo.incorporarJugadorEquipoServiceImpl1;
+import org.informatorio.services.lista.ListarService;
+import org.informatorio.services.lista.ListarServiceImpl;
 import org.informatorio.services.menu.MenuService;
 import org.informatorio.services.menu.MenuServiceImpl1;
+import org.informatorio.services.registrarEquipo.registrarEquipoService;
+import org.informatorio.services.registrarEquipo.reigistrarEquipoServiceImple1;
 import org.informatorio.services.registrarJugador.RegistrarJugadorService;
 import org.informatorio.services.registrarJugador.RegistrarJugadorServiceImpl1;
+import org.informatorio.services.registrarPartidos.RegistrarPartidoServiceImpl1;
+import org.informatorio.services.registrarPartidos.RegistrarPartidosService;
 
 import java.util.Scanner;
 
@@ -15,14 +28,27 @@ public class AppRun {
     JugadoresStoring jugadoresStoring = new JugadoresStoring();
     EquiposStoring equiposStoring = new EquiposStoring();
     PartidosStoring partidosStoring = new PartidosStoring();
+    ListarService<Partido> listarPartidoService = new ListarServiceImpl<>(partidosStoring.getListaPartidos());
+    ListarServiceImpl<Equipo> listarEquipoService = new ListarServiceImpl<>(equiposStoring.getListaEquipos());
+    ListarService<Jugador> listarJugadorService = new ListarServiceImpl<>(jugadoresStoring.getListaJugadores());
     RegistrarJugadorService registrarJugadorService = new RegistrarJugadorServiceImpl1();
+    registrarEquipoService registrarEquipoService = new reigistrarEquipoServiceImple1();
+    RegistrarPartidosService registrarPartidosService = new RegistrarPartidoServiceImpl1(listarEquipoService);
+    incorporarJugadorEquipoService incorporarJugadorEquipoService = new incorporarJugadorEquipoServiceImpl1(listarEquipoService,listarJugadorService);
+    asignarGolesAJugadorService asignarGolesAJugadorService = new asignarGolesAJugadorServiceImpl1(listarPartidoService);
     Scanner scanner = new Scanner(System.in);
 
     private MenuService menu = new MenuServiceImpl1(
             jugadoresStoring,
             equiposStoring,
             partidosStoring,
-            registrarJugadorService);
+            registrarJugadorService,
+            registrarEquipoService,
+            registrarPartidosService,
+            incorporarJugadorEquipoService,
+            listarEquipoService,
+            asignarGolesAJugadorService
+            );
 
 
     public void runApp(){

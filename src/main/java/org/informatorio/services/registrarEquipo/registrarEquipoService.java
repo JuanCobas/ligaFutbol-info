@@ -7,6 +7,6 @@ import java.util.Scanner;
 
 public interface registrarEquipoService {
 
-    public Equipo crearJugador(Scanner scanner, EquiposStoring equiposStoring);
+    public Equipo crearEquipo(EquiposStoring equiposStoring);
 
 }
