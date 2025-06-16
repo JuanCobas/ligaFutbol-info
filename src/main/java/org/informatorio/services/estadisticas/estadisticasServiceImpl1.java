@@ -4,9 +4,11 @@ import org.informatorio.Storing.EquiposStoring;
 import org.informatorio.Storing.JugadoresStoring;
 import org.informatorio.Storing.PartidosStoring;
 import org.informatorio.entities.Equipo;
+import org.informatorio.entities.GolesPorPartidoPorJugador;
 import org.informatorio.entities.Jugador.Jugador;
 import org.informatorio.entities.Jugador.JugadorSuplente;
 import org.informatorio.entities.Jugador.JugadorTitular;
+import org.informatorio.entities.Partido;
 
 import java.util.Comparator;
 import java.util.HashMap;
@@ -26,6 +28,12 @@ public class estadisticasServiceImpl1 implements estadisticasService{
         this.equiposAlmacenados = equiposAlmacenados;
     }
 
+    public Equipo buscarEquipoDeJugador(Jugador jugador) {
+
+        return equiposAlmacenados.getListaEquipos().stream().filter(equipo -> equipo.getJugadores().
+                contains(jugador)).findFirst().orElse(null);
+
+    }
 
     @Override
     public Jugador goleadorDeLiga() {
@@ -39,8 +47,39 @@ public class estadisticasServiceImpl1 implements estadisticasService{
     }
 
     @Override
-    public void promedioGolesPorPartidoPorEquipo() {
+    public Map<Equipo, Float> promedioGolesPorPartidoPorEquipo() {
+        Map<Equipo, Float> equiposYGoles = new HashMap<>();
+        Map<Equipo, Integer> cantidadPartidos = new HashMap<>();
+        Map<Equipo, Float> promedioPorEquipo = new HashMap<>();
+        Float promedio = 0f;
 
+        List<Partido> listaPartidos = partidosAlmacenados.getListaPartidos();
+        Equipo equipo;
+        for(Partido partido : listaPartidos){
+            cantidadPartidos.merge(partido.getEquipos().get(0), 1, (a, b) -> a + b);
+            cantidadPartidos.merge(partido.getEquipos().get(1), 1, (a, b) -> a + b);
+            for (GolesPorPartidoPorJugador golesPorPartidoPorJugador : partido.getGolesPorPartidoPorJugadors()){
+                equipo = buscarEquipoDeJugador(golesPorPartidoPorJugador.getJugador());
+                equiposYGoles.merge(equipo, (float)golesPorPartidoPorJugador.getGoles(), (a, b) -> a + b);
+            }
+        }
+        for (Map.Entry<Equipo, Float> entry : equiposYGoles.entrySet()){
+            promedio = entry.getValue()/cantidadPartidos.get(entry.getKey());
+            promedioPorEquipo.put(entry.getKey(), promedio);
+        }
+
+        return promedioPorEquipo;
+
+    }
+
+    public void mostrarPromedioGolesPorPartidoPorEquipo(){
+
+        Map<Equipo, Float> promedioPorEquipo = promedioGolesPorPartidoPorEquipo();
+
+        for (Map.Entry<Equipo, Float> entry : promedioPorEquipo.entrySet()){
+            System.out.print(entry.getKey() + " ");
+            System.out.println(entry.getValue());
+        }
     }
 
     @Override

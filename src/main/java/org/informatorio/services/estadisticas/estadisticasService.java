@@ -6,12 +6,13 @@ import org.informatorio.entities.Jugador.JugadorSuplente;
 import org.informatorio.entities.Jugador.JugadorTitular;
 
 import java.util.List;
+import java.util.Map;
 
 public interface estadisticasService {
 
     public Jugador goleadorDeLiga();
 
-    public void promedioGolesPorPartidoPorEquipo();
+    public Map<Equipo, Float> promedioGolesPorPartidoPorEquipo();
 
     public List<Equipo> rankingEquiposPorCantidadGoles();
 
