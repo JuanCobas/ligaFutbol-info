@@ -152,13 +152,20 @@ public class estadisticasServiceImpl1 implements estadisticasService{
 
         JugadorTitular jugadorTitular = jugadoresAlmacenados.getListaJugadores().stream()
                 .filter(jugador -> jugador instanceof JugadorTitular).map(jugador -> (JugadorTitular) jugador)
-                .max(Comparator.comparingInt(jugador -> jugador.getCantidadGoles())).orElse(null);
+                .max(Comparator.comparingInt(jugador -> (int)jugador.getMinutosJugados())).orElse(null);
         return jugadorTitular;
 
     }
 
     @Override
     public void mostrarJugadoresTitularsConMasMinutos(){
-        System.out.println("Jugador Titular con mas minutos jugados: " + jugadorTitularConMasMinutos().getNombreCompleto());
+        JugadorTitular jugadorTitular = jugadorTitularConMasMinutos();
+        if (jugadorTitular != null) {
+            System.out.println("Jugador Titular con mas minutos jugados: " + jugadorTitularConMasMinutos().getNombreCompleto());
+        }
+        else{
+            System.out.println("No hay jugadores con minutos todavia");
+        }
+
     }
 }

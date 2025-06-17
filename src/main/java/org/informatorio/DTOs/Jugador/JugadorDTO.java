@@ -6,7 +6,7 @@ public record JugadorDTO(
         @CsvBindByName(column = "Nombre") String nombreCompleto,
         @CsvBindByName(column = "Edad")int edad,
         @CsvBindByName(column = "Goles")int cantidadGoles,
-        @CsvBindByName(column = "Titular")boolean esTitular
+        @CsvBindByName(column = "Titular")String esTitular
 ) {
 
 }

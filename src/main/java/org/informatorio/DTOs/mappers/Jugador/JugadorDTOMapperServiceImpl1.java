@@ -9,25 +9,24 @@ public class JugadorDTOMapperServiceImpl1 implements DTOMapperService<Jugador,Ju
 
     @Override
     public JugadorDTO mapperToDTO(Jugador jugador) {
-        boolean titular;
+        String titular;
         if(jugador instanceof JugadorTitular){
-            titular = Boolean.TRUE;
+            titular = "SI";
         }
         else {
-            titular = Boolean.FALSE;
+            titular = "NO";
         }
 
-        JugadorDTO jugadorDTO = new JugadorDTO(jugador.getNombreCompleto(), jugador.getEdad(),
-                jugador.getCantidadGoles(), titular);
 
-        return jugadorDTO;
+
+        return new JugadorDTO(jugador.getNombreCompleto(), jugador.getEdad(), jugador.getCantidadGoles(), titular);
     }
 
     @Override
     public Jugador mapperToObject(JugadorDTO jugadorDTO) {
         String titular;
         Jugador jugador;
-        if (jugadorDTO.esTitular()){
+        if (jugadorDTO.esTitular().equals("SI")){
             jugador = new JugadorTitular(jugadorDTO.nombreCompleto(),jugadorDTO.edad());
         }
         else{

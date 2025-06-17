@@ -26,21 +26,25 @@ public class PersistenciaCSVImpl1<T, DTO> implements PersistenciaCSV<T>{
     private final String MENU_CREACION_ARCHIVO_FAIL = String.
             format("El archivo ( %s ) no pudo ser creado", nombre);
 
+    private final String UBICACION_ARCHIVO = "\\src\\main\\java\\org\\informatorio\\recursos\\";
+
     public PersistenciaCSVImpl1(ListarService<T> listarObjetos, DTOMapperService<T,DTO> mapperService){
         this.listarObjetos = listarObjetos;
         this.mapperService = mapperService;
     }
 
+    @Override
     public void guardarObjeto(List<T> list) throws IOException, CsvDataTypeMismatchException, CsvRequiredFieldEmptyException {
         Scanner scanner = new Scanner(System.in);
         nombre = "";
-
         System.out.println(MENU_SELECCIONAR_NOMBRE);
         nombre = scanner.nextLine();
+
+        String ruta = System.getProperty("user.dir").concat(UBICACION_ARCHIVO).concat(nombre).concat(".csv");
         File file;
         FileWriter fileWriter;
         try {
-            file = new File(nombre);
+            file = new File(ruta);
             if(file.createNewFile()){
                 System.out.println(MENU_CREACION_ARCHIVO_EXITO);
             }
@@ -62,15 +66,8 @@ public class PersistenciaCSVImpl1<T, DTO> implements PersistenciaCSV<T>{
         catch (IOException e){
 
         }
-        finally {
-
-        }
-
 
 
     }
-
-
-
 
 }

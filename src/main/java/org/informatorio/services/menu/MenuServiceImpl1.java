@@ -6,6 +6,7 @@ import org.informatorio.Storing.PartidosStoring;
 import org.informatorio.Utils.InputUtils;
 import org.informatorio.entities.Equipo;
 import org.informatorio.entities.Jugador.Jugador;
+import org.informatorio.services.PersistanceCSV.Jugador.JugadorCSVService;
 import org.informatorio.services.asignarGolesJugador.asignarGolesAJugadorService;
 import org.informatorio.services.estadisticas.estadisticasService;
 import org.informatorio.services.incorporarJugadorEquipo.incorporarJugadorEquipoService;
@@ -49,6 +50,7 @@ public class MenuServiceImpl1 implements MenuService {
     private incorporarJugadorEquipoService incorporarJugadorEquipoService;
     private asignarGolesAJugadorService asignarGolesAJugadorService;
     private estadisticasService estadisticasService;
+    private JugadorCSVService jugadorCSVService;
 
 
     public MenuServiceImpl1(JugadoresStoring jugadoresAlmacenados,
@@ -60,7 +62,8 @@ public class MenuServiceImpl1 implements MenuService {
                             incorporarJugadorEquipoService incorporarJugadorEquipoService,
                             ListarService<Equipo> listarEquipos,
                             asignarGolesAJugadorService asignarGolesAJugadorService,
-                            estadisticasService estadisticasService) {
+                            estadisticasService estadisticasService,
+                            JugadorCSVService jugadorCSVService) {
 
         this.jugadoresAlmacenados = jugadoresAlmacenados;
         this.equiposAlmacenados = equiposAlmacenados;
@@ -73,6 +76,7 @@ public class MenuServiceImpl1 implements MenuService {
         this.listarEquipos = listarEquipos;
         this.asignarGolesAJugadorService = asignarGolesAJugadorService;
         this.estadisticasService = estadisticasService;
+        this.jugadorCSVService = jugadorCSVService;
     }
 
     @Override
@@ -140,6 +144,10 @@ public class MenuServiceImpl1 implements MenuService {
             }
             case 12: {
                 estadisticasService.mostrarJugadoresTitularsConMasMinutos();
+                break;
+            }
+            case 13: {
+                jugadorCSVService.PersistirJugadoresDeEquipo();
                 break;
             }
         }
