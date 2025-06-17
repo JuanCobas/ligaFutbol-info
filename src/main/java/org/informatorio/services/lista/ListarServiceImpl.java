@@ -19,6 +19,9 @@ public class ListarServiceImpl<T> implements ListarService<T> {
         this.lista = lista;
     }
 
+    /// Servicio para mostrar listas genericas y seleccionar elementos de la misma retornandolo.
+    /// Los Objetos se listan y muestran segun lo que devuelva su metodo toString.
+
     @Override
     public void listar() {
 

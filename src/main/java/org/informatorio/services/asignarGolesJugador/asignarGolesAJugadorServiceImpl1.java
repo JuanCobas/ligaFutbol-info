@@ -20,6 +20,9 @@ public class asignarGolesAJugadorServiceImpl1 implements asignarGolesAJugadorSer
     private ListarService<Partido> listarPartidos;
     private ListarService<Equipo> listarEquipos;
 
+    /// Servicio que permite en ultima instancia crea un objeto del tipo GolesPorPartidoPorJugador
+    /// en insertarlo en un objeto del tipo Partido
+
     public asignarGolesAJugadorServiceImpl1(ListarService<Partido> listarPartidos) {
         this.listarPartidos = listarPartidos;
         this.listarEquipos = null;

@@ -28,6 +28,8 @@ public class estadisticasServiceImpl1 implements estadisticasService{
         this.equiposAlmacenados = equiposAlmacenados;
     }
 
+    /// Servicio para obtener y mostrar por pantalla estadisticas especificas de jugadores, equipos, goles realizados.
+
     @Override
     public Equipo buscarEquipoDeJugador(Jugador jugador) {
 

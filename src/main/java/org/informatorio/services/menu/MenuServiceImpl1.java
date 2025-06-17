@@ -19,6 +19,9 @@ import java.util.Scanner;
 
 public class MenuServiceImpl1 implements MenuService {
 
+    /// Implementacion de un MENU que permite mostrar opciones, retornar el
+    /// entero seleccionado y usarlo para correr la opcion deseada.
+
     private final int OPCIONES = 13;
     private final  String MENU = "LIGA DE FUTBOL\n" +
             "1  - Registrar Jugador\n" +

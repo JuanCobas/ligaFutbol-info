@@ -19,6 +19,8 @@ public class incorporarJugadorEquipoServiceImpl1 implements incorporarJugadorEqu
         this.listaJugadores = listaJugadores;
     }
 
+    /// Servicio para registrar asignar Jugadores existentes a un Equipo tambien existente
+
     @Override
     public Equipo buscarEquipoDeJugador(Jugador jugador) {
 

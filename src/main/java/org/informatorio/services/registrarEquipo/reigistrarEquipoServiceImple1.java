@@ -7,6 +7,10 @@ import java.util.Scanner;
 
 public class reigistrarEquipoServiceImple1 implements registrarEquipoService {
 
+
+    /// Servicio para registrar Equipos nuevos y guardarlos en memoria.
+
+
     String MENU_INICIO = "Va a registrar un equipo";
     String MENU_NOMBRE = "Por favor ingrese el nombre completo del equipo";
 

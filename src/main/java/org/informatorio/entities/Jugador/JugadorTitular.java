@@ -17,7 +17,7 @@ public class JugadorTitular extends Jugador{
     }
 
     public void setMinutosJugados(long minutosJugados) {
-        this.minutosJugados = minutosJugados;
+        this.minutosJugados += minutosJugados;
     }
 
     @Override

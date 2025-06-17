@@ -11,6 +11,10 @@ import java.util.*;
 
 public class DataGenerator {
 
+
+    /// Intento de generador de datos... Salio por CHATGPT pero hay que readecuarlo para que actue sobre los servicios de Storing.
+    /// SIN USO POR AHORA
+
     static public void generateData(){
         ArrayList<Equipo> equipos = new ArrayList<>();
         Random random = new Random();
