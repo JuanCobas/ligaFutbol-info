@@ -14,18 +14,26 @@ public class asignarGolesAJugadorServiceImpl1 implements asignarGolesAJugadorSer
 
     private final String MENU = "VA A ASIGNAR GOLES A UN JUGADOR DE UN PARTIDO A ELEGIR";
     private final String MENU_GOLES = "Indique la cantidad de goles del jugador en dicho partido";
+    private final String MENU_JUGADOR_HIZO_GOLES = "El jugador ya hizo goles en este partido";
 
     private ListarService<Jugador> listarJugadores;
-    private final ListarService<Partido> listarPartidos;
+    private ListarService<Partido> listarPartidos;
     private ListarService<Equipo> listarEquipos;
-    private final Scanner scanner;
-    public asignarGolesAJugadorServiceImpl1(ListarService<Partido> listarPartidos, Scanner scanner) {
+
+    /// Servicio que permite en ultima instancia crea un objeto del tipo GolesPorPartidoPorJugador
+    /// en insertarlo en un objeto del tipo Partido
+
+    public asignarGolesAJugadorServiceImpl1(ListarService<Partido> listarPartidos) {
         this.listarPartidos = listarPartidos;
-        this.scanner = scanner;
         this.listarEquipos = null;
         this.listarJugadores = null;
 
 
+    }
+
+    @Override
+    public boolean verificarJugadorHizoGoles(Partido partido, Jugador jugador) {
+        return partido.getGolesPorPartidoPorJugadors().stream().anyMatch(goles -> goles.getJugador().equals(jugador));
     }
 
     @Override
@@ -39,15 +47,30 @@ public class asignarGolesAJugadorServiceImpl1 implements asignarGolesAJugadorSer
         System.out.println(MENU);
         listarPartidos.listar();
         partidoSeleccionado = listarPartidos.seleccionarDeLista();
+        if(partidoSeleccionado == null){
+            return;
+        }
         listarEquipos = new ListarServiceImpl<Equipo>(partidoSeleccionado.getEquipos());
         listarEquipos.listar();
         equipoSeleccionado = listarEquipos.seleccionarDeLista();
+        if(equipoSeleccionado == null){
+            return;
+        }
         listarJugadores = new ListarServiceImpl<Jugador>(equipoSeleccionado.getJugadores());
         listarJugadores.listar();
         jugadorSeleccionado = listarJugadores.seleccionarDeLista();
+        if(jugadorSeleccionado == null){
+            return;
+        }
+        boolean jugadorYaHizoGoles = verificarJugadorHizoGoles(partidoSeleccionado, jugadorSeleccionado);
+        if (jugadorYaHizoGoles) {
+            System.out.println(MENU_JUGADOR_HIZO_GOLES);
+            return;
+        }
         System.out.println(MENU_GOLES);
         goles = (int)InputUtils.leerEnteroPositivo();
         partidoSeleccionado.getGolesPorPartidoPorJugadors().
                 add(new GolesPorPartidoPorJugador(jugadorSeleccionado, goles, partidoSeleccionado));
+        jugadorSeleccionado.setCantidadGoles(goles);
     }
 }

@@ -7,7 +7,7 @@ import java.util.List;
 
 public class EquiposStoring {
 
-    /// Por no tener persistencia almaceno aqui los equipos creados
+    /// Por no tener persistencia almaceno aqui los Equipos creados
     private List<Equipo> listaEquipos = new ArrayList<Equipo>();
 
     public List<Equipo> getListaEquipos() {

@@ -1,5 +1,6 @@
 package org.informatorio.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Partido {
@@ -15,23 +16,23 @@ public class Partido {
 
     }
 
-    public Partido(List<Equipo> equipos,
-                   List<GolesPorPartidoPorJugador> golesPorPartidoPorJugadors)
+    public Partido(List<Equipo> equipos
+                   )
     {
         this.equipos = equipos;
         this.ganador = null;
         empate = true;
-        this.golesPorPartidoPorJugadors = golesPorPartidoPorJugadors;
+        this.golesPorPartidoPorJugadors = new ArrayList<GolesPorPartidoPorJugador>();
     }
 
     public Partido(List<Equipo> equipos,
-                   Equipo ganador,
-                   List<GolesPorPartidoPorJugador> golesPorPartidoPorJugadors)
+                   Equipo ganador
+                   )
     {
         this.equipos = equipos;
         this.ganador = ganador;
         empate = false;
-        this.golesPorPartidoPorJugadors = golesPorPartidoPorJugadors;
+        this.golesPorPartidoPorJugadors = new ArrayList<GolesPorPartidoPorJugador>();
     }
 
 
@@ -62,6 +63,11 @@ public class Partido {
 
     public List<GolesPorPartidoPorJugador> getGolesPorPartidoPorJugadors() {
         return golesPorPartidoPorJugadors;
+    }
+
+    @Override
+    public String toString() {
+        return "Partido: " + "equipos=" + equipos;
     }
 
 }

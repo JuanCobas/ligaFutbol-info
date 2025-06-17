@@ -9,7 +9,7 @@ import java.util.List;
 
 public class JugadoresStoring {
 
-    /// Por no tener persistencia almaceno aqui los jugadores creados
+    /// Por no tener persistencia almaceno aqui los Jugadores creados
     private List<Jugador> listaJugadores = new ArrayList<Jugador>();
 
     public List<Jugador> getListaJugadores() {

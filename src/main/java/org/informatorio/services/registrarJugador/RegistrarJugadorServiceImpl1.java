@@ -10,6 +10,10 @@ import java.util.Scanner;
 
 public class RegistrarJugadorServiceImpl1 implements RegistrarJugadorService {
 
+    /// Servicio para registrar Jugadores nuevos y guardarlos en memoria.
+
+
+
     String MENU_INICIO = "Va a registrar un jugador";
     String MENU_NOMBRE = "Por favor ingrese el nombre completo del jugador";
     String MENU_EDAD = "Por favor ingrese la edad del jugador";
@@ -49,7 +53,7 @@ public class RegistrarJugadorServiceImpl1 implements RegistrarJugadorService {
         } else {
             int partidosDesdeBanco;
             System.out.println(MENU_JUGADOR_SUPLENTE);
-            partidosDesdeBanco = (int) InputUtils.leerEnteroPositivo();
+            partidosDesdeBanco = (int) InputUtils.leerEnteroNoNegativo();
             jugador = new JugadorSuplente(nombreCompleto,edad,partidosDesdeBanco);
         }
 
