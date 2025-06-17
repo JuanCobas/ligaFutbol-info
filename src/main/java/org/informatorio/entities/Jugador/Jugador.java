@@ -43,6 +43,10 @@ public class Jugador {
         this.cantidadGoles += cantidadGoles;
     }
 
+    public void resetCantidadGoles(){
+        this.cantidadGoles = 0;
+    }
+
     @Override
     public String toString() {
         return this.nombreCompleto;

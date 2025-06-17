@@ -28,6 +28,7 @@ public class estadisticasServiceImpl1 implements estadisticasService{
         this.equiposAlmacenados = equiposAlmacenados;
     }
 
+    @Override
     public Equipo buscarEquipoDeJugador(Jugador jugador) {
 
         return equiposAlmacenados.getListaEquipos().stream().filter(equipo -> equipo.getJugadores().
@@ -37,13 +38,24 @@ public class estadisticasServiceImpl1 implements estadisticasService{
 
     @Override
     public Jugador goleadorDeLiga() {
-        Jugador jugadorConMasGoles = new Jugador();
+        Jugador jugadorConMasGoles = null;
         for(Jugador jugador : jugadoresAlmacenados.getListaJugadores() ){
-            if(jugador.getCantidadGoles() > jugadorConMasGoles.getCantidadGoles()){
+            if(jugadorConMasGoles == null || jugador.getCantidadGoles() > jugadorConMasGoles.getCantidadGoles()){
                 jugadorConMasGoles = jugador;
             }
         }
         return jugadorConMasGoles;
+    }
+
+    @Override
+    public void mostrarGoleadorDeLiga(){
+        Jugador jugadorConMasGoles = goleadorDeLiga();
+        if(jugadorConMasGoles == null){
+            System.out.println("No se encontro el goleador de liga");
+        }
+        else {
+            System.out.println("Goleador de la Liga: " + jugadorConMasGoles.getNombreCompleto() + " - Goles:" + jugadorConMasGoles.getCantidadGoles());
+        }
     }
 
     @Override
@@ -72,6 +84,7 @@ public class estadisticasServiceImpl1 implements estadisticasService{
 
     }
 
+    @Override
     public void mostrarPromedioGolesPorPartidoPorEquipo(){
 
         Map<Equipo, Float> promedioPorEquipo = promedioGolesPorPartidoPorEquipo();
@@ -143,7 +156,7 @@ public class estadisticasServiceImpl1 implements estadisticasService{
     }
 
     @Override
-    public void mostrarJugadoresTitularsQueNuncaIngresaron(){
-        System.out.println(jugadorTitularConMasMinutos());
+    public void mostrarJugadoresTitularsConMasMinutos(){
+        System.out.println("Jugador Titular con mas minutos jugados: " + jugadorTitularConMasMinutos().getNombreCompleto());
     }
 }

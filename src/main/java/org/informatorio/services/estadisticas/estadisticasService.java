@@ -10,6 +10,8 @@ import java.util.Map;
 
 public interface estadisticasService {
 
+    public Equipo buscarEquipoDeJugador(Jugador jugador);
+
     public Jugador goleadorDeLiga();
 
     public Map<Equipo, Float> promedioGolesPorPartidoPorEquipo();
@@ -20,10 +22,14 @@ public interface estadisticasService {
 
     public JugadorTitular jugadorTitularConMasMinutos();
 
-    public void mostrarJugadoresTitularsQueNuncaIngresaron();
+    public void mostrarJugadoresTitularsConMasMinutos();
 
     public void mostrarJugadoresSuplentesQueNuncaIngresaron();
 
     public void mostrarEquiposPorCantidadGoles();
+
+    public void mostrarPromedioGolesPorPartidoPorEquipo();
+
+    public void mostrarGoleadorDeLiga();
 
 }

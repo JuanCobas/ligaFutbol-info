@@ -3,11 +3,14 @@ package org.informatorio;
 import org.informatorio.Storing.EquiposStoring;
 import org.informatorio.Storing.JugadoresStoring;
 import org.informatorio.Storing.PartidosStoring;
+import org.informatorio.dataGenerator.DataGenerator;
 import org.informatorio.entities.Equipo;
 import org.informatorio.entities.Jugador.Jugador;
 import org.informatorio.entities.Partido;
 import org.informatorio.services.asignarGolesJugador.asignarGolesAJugadorService;
 import org.informatorio.services.asignarGolesJugador.asignarGolesAJugadorServiceImpl1;
+import org.informatorio.services.estadisticas.estadisticasService;
+import org.informatorio.services.estadisticas.estadisticasServiceImpl1;
 import org.informatorio.services.incorporarJugadorEquipo.incorporarJugadorEquipoService;
 import org.informatorio.services.incorporarJugadorEquipo.incorporarJugadorEquipoServiceImpl1;
 import org.informatorio.services.lista.ListarService;
@@ -36,6 +39,7 @@ public class AppRun {
     RegistrarPartidosService registrarPartidosService = new RegistrarPartidoServiceImpl1(listarEquipoService);
     incorporarJugadorEquipoService incorporarJugadorEquipoService = new incorporarJugadorEquipoServiceImpl1(listarEquipoService,listarJugadorService);
     asignarGolesAJugadorService asignarGolesAJugadorService = new asignarGolesAJugadorServiceImpl1(listarPartidoService);
+    estadisticasService estadisticasService = new estadisticasServiceImpl1(jugadoresStoring,partidosStoring,equiposStoring);
     Scanner scanner = new Scanner(System.in);
 
     private MenuService menu = new MenuServiceImpl1(
@@ -47,7 +51,8 @@ public class AppRun {
             registrarPartidosService,
             incorporarJugadorEquipoService,
             listarEquipoService,
-            asignarGolesAJugadorService
+            asignarGolesAJugadorService,
+            estadisticasService
             );
 
 

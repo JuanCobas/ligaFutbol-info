@@ -68,5 +68,6 @@ public class asignarGolesAJugadorServiceImpl1 implements asignarGolesAJugadorSer
         goles = (int)InputUtils.leerEnteroPositivo();
         partidoSeleccionado.getGolesPorPartidoPorJugadors().
                 add(new GolesPorPartidoPorJugador(jugadorSeleccionado, goles, partidoSeleccionado));
+        jugadorSeleccionado.setCantidadGoles(goles);
     }
 }
