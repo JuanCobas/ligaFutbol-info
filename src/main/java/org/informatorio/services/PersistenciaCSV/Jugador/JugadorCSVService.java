@@ -1,4 +1,4 @@
-package org.informatorio.services.PersistanceCSV.Jugador;
+package org.informatorio.services.PersistenciaCSV.Jugador;
 
 public interface JugadorCSVService {
 

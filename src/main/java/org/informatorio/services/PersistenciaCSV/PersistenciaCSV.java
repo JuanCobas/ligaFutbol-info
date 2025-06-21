@@ -1,4 +1,4 @@
-package org.informatorio.services.PersistanceCSV;
+package org.informatorio.services.PersistenciaCSV;
 
 import com.opencsv.exceptions.CsvDataTypeMismatchException;
 import com.opencsv.exceptions.CsvRequiredFieldEmptyException;

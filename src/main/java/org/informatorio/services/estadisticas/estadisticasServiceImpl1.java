@@ -10,10 +10,7 @@ import org.informatorio.entities.Jugador.JugadorSuplente;
 import org.informatorio.entities.Jugador.JugadorTitular;
 import org.informatorio.entities.Partido;
 
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class estadisticasServiceImpl1 implements estadisticasService{
@@ -65,7 +62,7 @@ public class estadisticasServiceImpl1 implements estadisticasService{
         Map<Equipo, Float> equiposYGoles = new HashMap<>();
         Map<Equipo, Integer> cantidadPartidos = new HashMap<>();
         Map<Equipo, Float> promedioPorEquipo = new HashMap<>();
-        Float promedio = 0f;
+        float promedio = 0f;
 
         List<Partido> listaPartidos = partidosAlmacenados.getListaPartidos();
         Equipo equipo;
@@ -103,6 +100,7 @@ public class estadisticasServiceImpl1 implements estadisticasService{
         rankingEquiposPorCantidadGoles =  equiposAlmacenados.getListaEquipos().stream()
                 .sorted(Comparator.comparingInt(equipo -> equipo.getJugadores().stream()
                         .mapToInt(jugador -> jugador.getCantidadGoles()).sum())).collect(Collectors.toList());
+        Collections.reverse(rankingEquiposPorCantidadGoles);
         return rankingEquiposPorCantidadGoles;
 
     }
@@ -110,7 +108,7 @@ public class estadisticasServiceImpl1 implements estadisticasService{
     @Override
     public void mostrarEquiposPorCantidadGoles(){
         List<Equipo> equiposRanking = rankingEquiposPorCantidadGoles();
-        Integer cantidadGoles = 0;
+        int cantidadGoles = 0;
         System.out.println("Ranking Equipos por Cantidad Goles");
 
         for(Equipo equipo : equiposRanking){
@@ -150,10 +148,9 @@ public class estadisticasServiceImpl1 implements estadisticasService{
     @Override
     public JugadorTitular jugadorTitularConMasMinutos() {
 
-        JugadorTitular jugadorTitular = jugadoresAlmacenados.getListaJugadores().stream()
+        return  jugadoresAlmacenados.getListaJugadores().stream()
                 .filter(jugador -> jugador instanceof JugadorTitular).map(jugador -> (JugadorTitular) jugador)
                 .max(Comparator.comparingInt(jugador -> (int)jugador.getMinutosJugados())).orElse(null);
-        return jugadorTitular;
 
     }
 

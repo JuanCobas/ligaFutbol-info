@@ -1,11 +1,10 @@
-package org.informatorio.services.PersistanceCSV;
+package org.informatorio.services.PersistenciaCSV;
 
 import com.opencsv.bean.StatefulBeanToCsv;
 import com.opencsv.bean.StatefulBeanToCsvBuilder;
 import com.opencsv.exceptions.CsvDataTypeMismatchException;
 import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
-import org.informatorio.DTOs.Jugador.JugadorDTO;
-import org.informatorio.DTOs.mappers.Jugador.DTOMapperService;
+import org.informatorio.DTOs.mappersInterface.DTOMapperService;
 import org.informatorio.services.lista.ListarService;
 
 import java.io.File;

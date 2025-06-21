@@ -6,7 +6,7 @@ import org.informatorio.Storing.PartidosStoring;
 import org.informatorio.Utils.InputUtils;
 import org.informatorio.entities.Equipo;
 import org.informatorio.entities.Jugador.Jugador;
-import org.informatorio.services.PersistanceCSV.Jugador.JugadorCSVService;
+import org.informatorio.services.PersistenciaCSV.Jugador.JugadorCSVService;
 import org.informatorio.services.asignarGolesJugador.asignarGolesAJugadorService;
 import org.informatorio.services.estadisticas.estadisticasService;
 import org.informatorio.services.incorporarJugadorEquipo.incorporarJugadorEquipoService;
