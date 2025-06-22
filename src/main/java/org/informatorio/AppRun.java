@@ -29,6 +29,10 @@ import org.informatorio.services.registrarJugador.RegistrarJugadorService;
 import org.informatorio.services.registrarJugador.RegistrarJugadorServiceImpl1;
 import org.informatorio.services.registrarPartidos.RegistrarPartidoServiceImpl1;
 import org.informatorio.services.registrarPartidos.RegistrarPartidosService;
+import org.informatorio.services.reports.reporteEquipo.reporteEquipo;
+import org.informatorio.services.reports.reporteEquipo.reporteEquipoImpl1;
+import org.informatorio.services.reports.reporteLiga.reporteLiga;
+import org.informatorio.services.reports.reporteLiga.reporteLigaImple1;
 
 import java.util.Scanner;
 
@@ -50,6 +54,8 @@ public class AppRun {
     DTOMapperService<Jugador, JugadorDTO> dtoMapperService = new JugadorDTOMapperServiceImpl1();
     PersistenciaCSV<Jugador> persistenciaCSVJugador = new PersistenciaCSVImpl1<>(listarJugadorService, dtoMapperService);
     JugadorCSVService jugadorCSVService = new JugadorCSVServiceImpl1(persistenciaCSVJugador,listarEquipoService);
+    reporteLiga reporteLiga = new reporteLigaImple1(jugadoresStoring,partidosStoring,equiposStoring,estadisticasService);
+    reporteEquipo reporteEquipo = new reporteEquipoImpl1(partidosStoring,estadisticasService, equiposStoring);
 
 
     private MenuService menu = new MenuServiceImpl1(
@@ -63,7 +69,9 @@ public class AppRun {
             listarEquipoService,
             asignarGolesAJugadorService,
             estadisticasService,
-            jugadorCSVService
+            jugadorCSVService,
+            reporteLiga,
+            reporteEquipo
             );
 
 

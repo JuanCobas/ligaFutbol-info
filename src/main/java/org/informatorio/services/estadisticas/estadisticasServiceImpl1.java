@@ -15,9 +15,9 @@ import java.util.stream.Collectors;
 
 public class estadisticasServiceImpl1 implements estadisticasService{
 
-    public JugadoresStoring jugadoresAlmacenados;
-    public PartidosStoring partidosAlmacenados;
-    public EquiposStoring equiposAlmacenados;
+    private JugadoresStoring jugadoresAlmacenados;
+    private PartidosStoring partidosAlmacenados;
+    private EquiposStoring equiposAlmacenados;
 
     public estadisticasServiceImpl1(JugadoresStoring jugadoresAlmacenados, PartidosStoring partidosAlmacenados, EquiposStoring equiposAlmacenados) {
         this.jugadoresAlmacenados = jugadoresAlmacenados;
@@ -146,7 +146,7 @@ public class estadisticasServiceImpl1 implements estadisticasService{
     }
 
     @Override
-    public JugadorTitular jugadorTitularConMasMinutos() {
+    public JugadorTitular jugadorTitularConMasMinutosDeLiga() {
 
         return  jugadoresAlmacenados.getListaJugadores().stream()
                 .filter(jugador -> jugador instanceof JugadorTitular).map(jugador -> (JugadorTitular) jugador)
@@ -155,10 +155,11 @@ public class estadisticasServiceImpl1 implements estadisticasService{
     }
 
     @Override
-    public void mostrarJugadoresTitularsConMasMinutos(){
-        JugadorTitular jugadorTitular = jugadorTitularConMasMinutos();
+    public void mostrarJugadoresTitularsConMasMinutos(JugadorTitular jugadorTitular){
+        JugadorTitular jugador = jugadorTitular;
         if (jugadorTitular != null) {
-            System.out.println("Jugador Titular con mas minutos jugados: " + jugadorTitularConMasMinutos().getNombreCompleto());
+            System.out.println("Jugador Titular con mas minutos jugados: " + jugadorTitularConMasMinutosDeLiga().getNombreCompleto()
+                    + " - Minutos Jugados" + jugadorTitular.getMinutosJugados());
         }
         else{
             System.out.println("No hay jugadores con minutos todavia");
