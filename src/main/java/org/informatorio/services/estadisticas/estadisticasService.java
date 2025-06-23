@@ -20,9 +20,9 @@ public interface estadisticasService {
 
     public List<JugadorSuplente> jugadoresSuplentesQueNuncaIngresaron();
 
-    public JugadorTitular jugadorTitularConMasMinutos();
+    public JugadorTitular jugadorTitularConMasMinutosDeLiga();
 
-    public void mostrarJugadoresTitularsConMasMinutos();
+    public void mostrarJugadoresTitularsConMasMinutos(JugadorTitular jugadorTitular);
 
     public void mostrarJugadoresSuplentesQueNuncaIngresaron();
 

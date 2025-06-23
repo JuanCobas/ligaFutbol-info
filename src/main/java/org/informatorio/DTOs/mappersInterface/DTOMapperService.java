@@ -1,4 +1,4 @@
-package org.informatorio.DTOs.mappers.Jugador;
+package org.informatorio.DTOs.mappersInterface;
 
 public interface DTOMapperService<T, DTO> {
 

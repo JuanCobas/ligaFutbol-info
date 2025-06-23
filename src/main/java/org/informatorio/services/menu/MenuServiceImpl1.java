@@ -6,7 +6,7 @@ import org.informatorio.Storing.PartidosStoring;
 import org.informatorio.Utils.InputUtils;
 import org.informatorio.entities.Equipo;
 import org.informatorio.entities.Jugador.Jugador;
-import org.informatorio.services.PersistanceCSV.Jugador.JugadorCSVService;
+import org.informatorio.services.PersistenciaCSV.Jugador.JugadorCSVService;
 import org.informatorio.services.asignarGolesJugador.asignarGolesAJugadorService;
 import org.informatorio.services.estadisticas.estadisticasService;
 import org.informatorio.services.incorporarJugadorEquipo.incorporarJugadorEquipoService;
@@ -15,6 +15,8 @@ import org.informatorio.services.lista.ListarServiceImpl;
 import org.informatorio.services.registrarEquipo.registrarEquipoService;
 import org.informatorio.services.registrarJugador.RegistrarJugadorService;
 import org.informatorio.services.registrarPartidos.RegistrarPartidosService;
+import org.informatorio.services.reports.reporteEquipo.reporteEquipo;
+import org.informatorio.services.reports.reporteLiga.reporteLiga;
 
 import java.util.Scanner;
 
@@ -23,7 +25,7 @@ public class MenuServiceImpl1 implements MenuService {
     /// Implementacion de un MENU que permite mostrar opciones, retornar el
     /// entero seleccionado y usarlo para correr la opcion deseada.
 
-    private final int OPCIONES = 13;
+    private final int OPCIONES = 15;
     private final  String MENU = "LIGA DE FUTBOL\n" +
             "1  - Registrar Jugador\n" +
             "2  - Crear Equipo\n" +
@@ -37,7 +39,9 @@ public class MenuServiceImpl1 implements MenuService {
             "10 - Mostrar Ranking de Equipos por cantidad de goles anotados\n" +
             "11 - Mostrar Jugadores Suplentes que nunca hayan ingresado\n" +
             "12 - Mostrar el jugador titular con mayor cantidad de minutos jugados\n" +
-            "13 - Exportar en un archivo .csv los jugadores de un equipo dado\n";
+            "13 - Exportar en un archivo .csv los jugadores de un equipo dado\n" +
+            "14 - Informe de la Liga\n" +
+            "15 - Infore de Equipo";
 
     private JugadoresStoring jugadoresAlmacenados;
     private EquiposStoring equiposAlmacenados;
@@ -51,6 +55,8 @@ public class MenuServiceImpl1 implements MenuService {
     private asignarGolesAJugadorService asignarGolesAJugadorService;
     private estadisticasService estadisticasService;
     private JugadorCSVService jugadorCSVService;
+    private reporteLiga reporteLiga;
+    private reporteEquipo reporteEquipo;
 
 
     public MenuServiceImpl1(JugadoresStoring jugadoresAlmacenados,
@@ -63,7 +69,9 @@ public class MenuServiceImpl1 implements MenuService {
                             ListarService<Equipo> listarEquipos,
                             asignarGolesAJugadorService asignarGolesAJugadorService,
                             estadisticasService estadisticasService,
-                            JugadorCSVService jugadorCSVService) {
+                            JugadorCSVService jugadorCSVService,
+                            reporteLiga reporteLiga,
+                            reporteEquipo reporteEquipo) {
 
         this.jugadoresAlmacenados = jugadoresAlmacenados;
         this.equiposAlmacenados = equiposAlmacenados;
@@ -77,6 +85,8 @@ public class MenuServiceImpl1 implements MenuService {
         this.asignarGolesAJugadorService = asignarGolesAJugadorService;
         this.estadisticasService = estadisticasService;
         this.jugadorCSVService = jugadorCSVService;
+        this.reporteLiga = reporteLiga;
+        this.reporteEquipo = reporteEquipo;
     }
 
     @Override
@@ -143,11 +153,21 @@ public class MenuServiceImpl1 implements MenuService {
                 break;
             }
             case 12: {
-                estadisticasService.mostrarJugadoresTitularsConMasMinutos();
+
+                estadisticasService.mostrarJugadoresTitularsConMasMinutos(estadisticasService.jugadorTitularConMasMinutosDeLiga());
                 break;
             }
             case 13: {
                 jugadorCSVService.PersistirJugadoresDeEquipo();
+                break;
+            }
+            case 14:{
+                reporteLiga.mostrarReporteLiga();
+                break;
+            }
+            case 15: {
+                Equipo equipo = reporteEquipo.seleccionarEquipo();
+                reporteEquipo.mostrarReporteEquipo(equipo);
                 break;
             }
         }

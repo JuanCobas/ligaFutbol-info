@@ -1,6 +1,6 @@
-package org.informatorio.DTOs.mappers.Jugador;
+package org.informatorio.DTOs.Jugador;
 
-import org.informatorio.DTOs.Jugador.JugadorDTO;
+import org.informatorio.DTOs.mappersInterface.DTOMapperService;
 import org.informatorio.entities.Jugador.Jugador;
 import org.informatorio.entities.Jugador.JugadorSuplente;
 import org.informatorio.entities.Jugador.JugadorTitular;

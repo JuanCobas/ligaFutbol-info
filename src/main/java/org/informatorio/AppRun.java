@@ -1,19 +1,18 @@
 package org.informatorio;
 
 import org.informatorio.DTOs.Jugador.JugadorDTO;
-import org.informatorio.DTOs.mappers.Jugador.DTOMapperService;
-import org.informatorio.DTOs.mappers.Jugador.JugadorDTOMapperServiceImpl1;
+import org.informatorio.DTOs.mappersInterface.DTOMapperService;
+import org.informatorio.DTOs.Jugador.JugadorDTOMapperServiceImpl1;
 import org.informatorio.Storing.EquiposStoring;
 import org.informatorio.Storing.JugadoresStoring;
 import org.informatorio.Storing.PartidosStoring;
-import org.informatorio.dataGenerator.DataGenerator;
 import org.informatorio.entities.Equipo;
 import org.informatorio.entities.Jugador.Jugador;
 import org.informatorio.entities.Partido;
-import org.informatorio.services.PersistanceCSV.Jugador.JugadorCSVService;
-import org.informatorio.services.PersistanceCSV.Jugador.JugadorCSVServiceImpl1;
-import org.informatorio.services.PersistanceCSV.PersistenciaCSV;
-import org.informatorio.services.PersistanceCSV.PersistenciaCSVImpl1;
+import org.informatorio.services.PersistenciaCSV.Jugador.JugadorCSVService;
+import org.informatorio.services.PersistenciaCSV.Jugador.JugadorCSVServiceImpl1;
+import org.informatorio.services.PersistenciaCSV.PersistenciaCSV;
+import org.informatorio.services.PersistenciaCSV.PersistenciaCSVImpl1;
 import org.informatorio.services.asignarGolesJugador.asignarGolesAJugadorService;
 import org.informatorio.services.asignarGolesJugador.asignarGolesAJugadorServiceImpl1;
 import org.informatorio.services.estadisticas.estadisticasService;
@@ -30,6 +29,10 @@ import org.informatorio.services.registrarJugador.RegistrarJugadorService;
 import org.informatorio.services.registrarJugador.RegistrarJugadorServiceImpl1;
 import org.informatorio.services.registrarPartidos.RegistrarPartidoServiceImpl1;
 import org.informatorio.services.registrarPartidos.RegistrarPartidosService;
+import org.informatorio.services.reports.reporteEquipo.reporteEquipo;
+import org.informatorio.services.reports.reporteEquipo.reporteEquipoImpl1;
+import org.informatorio.services.reports.reporteLiga.reporteLiga;
+import org.informatorio.services.reports.reporteLiga.reporteLigaImple1;
 
 import java.util.Scanner;
 
@@ -51,6 +54,8 @@ public class AppRun {
     DTOMapperService<Jugador, JugadorDTO> dtoMapperService = new JugadorDTOMapperServiceImpl1();
     PersistenciaCSV<Jugador> persistenciaCSVJugador = new PersistenciaCSVImpl1<>(listarJugadorService, dtoMapperService);
     JugadorCSVService jugadorCSVService = new JugadorCSVServiceImpl1(persistenciaCSVJugador,listarEquipoService);
+    reporteLiga reporteLiga = new reporteLigaImple1(jugadoresStoring,partidosStoring,equiposStoring,estadisticasService);
+    reporteEquipo reporteEquipo = new reporteEquipoImpl1(partidosStoring,estadisticasService, equiposStoring);
 
 
     private MenuService menu = new MenuServiceImpl1(
@@ -64,7 +69,9 @@ public class AppRun {
             listarEquipoService,
             asignarGolesAJugadorService,
             estadisticasService,
-            jugadorCSVService
+            jugadorCSVService,
+            reporteLiga,
+            reporteEquipo
             );
 
 

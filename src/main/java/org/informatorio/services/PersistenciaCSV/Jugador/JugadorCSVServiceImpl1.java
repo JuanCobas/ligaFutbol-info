@@ -1,14 +1,10 @@
-package org.informatorio.services.PersistanceCSV.Jugador;
+package org.informatorio.services.PersistenciaCSV.Jugador;
 
-import org.informatorio.DTOs.Jugador.JugadorDTO;
-import org.informatorio.DTOs.mappers.Jugador.DTOMapperService;
-import org.informatorio.Storing.EquiposStoring;
 import org.informatorio.entities.Equipo;
 import org.informatorio.entities.Jugador.Jugador;
-import org.informatorio.services.PersistanceCSV.PersistenciaCSV;
+import org.informatorio.services.PersistenciaCSV.PersistenciaCSV;
 import org.informatorio.services.lista.ListarService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class JugadorCSVServiceImpl1 implements  JugadorCSVService{
